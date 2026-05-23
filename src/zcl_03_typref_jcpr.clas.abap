@@ -14,6 +14,6 @@ ENDCLASS.
 CLASS zcl_03_typref_jcpr IMPLEMENTATION.
 
     method if_oo_adt_classrun~main.
-        out->write( 'Hola' ).
+        out->write( 'Hola mi amigo como estas' ).
     endmethod.
 ENDCLASS.
