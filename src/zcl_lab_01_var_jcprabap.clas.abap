@@ -101,6 +101,12 @@ CLASS zcl_lab_01_var_jcprabap IMPLEMENTATION.
     mv_product       = mc_product.
     mv_bar_code      = mc_bar_code.
 
+    "6. Declaraciones en Línea
+
+    data(LV_PRODUCT) = `Laptop`.
+    data(lv_bar_code) = xco_cp=>string( '1212121211' )->as_xstring( xco_cp_character=>code_page->utf_8 )->value.
+
+
   ENDMETHOD.
 
 ENDCLASS.
