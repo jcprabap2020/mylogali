@@ -33,12 +33,15 @@ CLASS zcl_lab_01_var_jcprabap IMPLEMENTATION.
     DATA: mv_id_code TYPE n LENGTH 4 VALUE '1110',
           mv_qr_code TYPE x LENGTH 5 VALUE 'F5CF'.
 
+    out->write( '----------------------------------------------' ).
     out->write( |asignada por value: { mv_purchase_date }| ).
     out->write( |asignada por value: { mv_purchase_time }| ).
 
-    data(mv_purchase_date1) = xco_cp=>sy->date( )->as( xco_cp_time=>format->abap )->value.
-    data(mv_purchase_time1) = xco_cp=>sy->time( )->as( xco_cp_time=>format->abap )->value.
+    "Aquí quise utilizar la definición INLINE con
+    DATA(mv_purchase_date1) = xco_cp=>sy->date( )->as( xco_cp_time=>format->abap )->value.
+    DATA(mv_purchase_time1) = xco_cp=>sy->time( )->as( xco_cp_time=>format->abap )->value.
 
+    out->write( '----------------------------------------------' ).
     out->write( |asignada por inline: { mv_purchase_date1 } | ).
     out->write( |asignada por inline: { mv_purchase_time1 } | ).
 
@@ -53,6 +56,9 @@ CLASS zcl_lab_01_var_jcprabap IMPLEMENTATION.
     DATA les_customer TYPE mty_customer.
 
     les_customer = VALUE #( id = 1 customer = 'Luis Marcel' age = 65 ).
+
+    out->write( '----------------------------------------------' ).
+    out->write( les_customer ).
 
     "3. Tipo de datos de referencia
 
@@ -70,6 +76,7 @@ CLASS zcl_lab_01_var_jcprabap IMPLEMENTATION.
     <fs_linea>-salary = 2000.
     <fs_linea>-salary_currency = 'USD'.
 
+    out->write( '----------------------------------------------' ).
     out->write( mv_employees ).
 
     "4. Objetos de datos
@@ -77,22 +84,25 @@ CLASS zcl_lab_01_var_jcprabap IMPLEMENTATION.
     DATA: mv_product  TYPE string  VALUE 'Laptop',
           mv_bar_code TYPE xstring VALUE '1212121211'.
 
+     out->write( '----------------------------------------------' ).
+     out->write( |mv_product: { mv_product } mv_bar_code: { mv_bar_code } | ).
+
     "5. Constantes
-    CONSTANTS: mc_date      type d value '20260524',
-               mc_time      type t value '094500',
-               mc_price     type f value '10.6',
-               mc_tax       type i value '16',
+    CONSTANTS: mc_date      TYPE d VALUE '20260524',
+               mc_time      TYPE t VALUE '094500',
+               mc_price     TYPE f VALUE '10.6',
+               mc_tax       TYPE i VALUE '16',
                mc_increase  TYPE decfloat16 VALUE '20.5',
                mc_discounts TYPE decfloat34 VALUE '10.5',
                mc_type      TYPE c LENGTH 10 VALUE '10',
                mc_shipping  TYPE p DECIMALS 2 VALUE '40.36',
                mc_id_code   TYPE n LENGTH 4 VALUE '1110',
                mc_qr_code   TYPE x LENGTH 5 VALUE 'F5CF',
-               mc_product  TYPE string  VALUE 'Laptop',
-               mc_bar_code TYPE xstring VALUE '1212121211'.
+               mc_product   TYPE string  VALUE 'Laptop',
+               mc_bar_code  TYPE xstring VALUE '1212121211'.
 
-    MV_PURCHASE_DATE = mc_date.
-    MV_PURCHASE_TIME = mc_time.
+    mv_purchase_date = mc_date.
+    mv_purchase_time = mc_time.
     mv_price         = mc_price.
     mv_tax           = mc_tax.
     mv_increase      = mc_increase.
@@ -104,12 +114,29 @@ CLASS zcl_lab_01_var_jcprabap IMPLEMENTATION.
     mv_product       = mc_product.
     mv_bar_code      = mc_bar_code.
 
+    out->write( '----------------------------------------------' ).
+    out->write( | mv_purchase_date: { mv_purchase_date } | ).
+    out->write( | mv_purchase_time: { mv_purchase_time } | ).
+    out->write( | mv_price: { mv_price } | ).
+    out->write( | mv_tax: { mv_tax } | ).
+    out->write( | mv_increase: { mv_increase } | ).
+    out->write( | mv_discounts: { mv_discounts } | ).
+    out->write( | mv_type: { mv_type } | ).
+    out->write( | mv_shipping: { mv_shipping } | ).
+    out->write( | mv_id_code: { mv_id_code } | ).
+    out->write( | mv_qr_code: { mv_qr_code } | ).
+    out->write( | mv_product: { mv_product } | ).
+    out->write( | mv_bar_code: { mv_bar_code } | ).
+
+
     "6. Declaraciones en Línea
 
-    data(LV_PRODUCT) = `Laptop`.
-    data(lv_bar_code) = xco_cp=>string( '1212121211' )->as_xstring( xco_cp_character=>code_page->utf_8 )->value.
+    DATA(lv_product) = `Laptop`.
+    DATA(lv_bar_code) = xco_cp=>string( '1212121211' )->as_xstring( xco_cp_character=>code_page->utf_8 )->value.
 
-
+    out->write( '----------------------------------------------' ).
+    out->write( | lv_product:   { lv_product } | ).
+    out->write( | lv_bar_code:  { lv_bar_code } | ).
   ENDMETHOD.
 
 ENDCLASS.
