@@ -17,8 +17,8 @@ CLASS zcl_lab_01_var_jcprabap IMPLEMENTATION.
 
     "1. Tipo de datos elementales
 
-    DATA: mv_purchase_date TYPE d,
-          mv_purchase_time TYPE t.
+    DATA: mv_purchase_date TYPE d VALUE '20260526',
+          mv_purchase_time TYPE t VALUE '000936'.
 
     DATA: mv_price TYPE f VALUE '10.6',
           mv_tax   TYPE i VALUE 16.
@@ -33,8 +33,14 @@ CLASS zcl_lab_01_var_jcprabap IMPLEMENTATION.
     DATA: mv_id_code TYPE n LENGTH 4 VALUE '1110',
           mv_qr_code TYPE x LENGTH 5 VALUE 'F5CF'.
 
-    mv_purchase_date = xco_cp=>sy->date( )->as( xco_cp_time=>format->abap )->value.
-    mv_purchase_time = xco_cp=>sy->time( )->as( xco_cp_time=>format->abap )->value.
+    out->write( |asignada por value: { mv_purchase_date }| ).
+    out->write( |asignada por value: { mv_purchase_time }| ).
+
+    data(mv_purchase_date1) = xco_cp=>sy->date( )->as( xco_cp_time=>format->abap )->value.
+    data(mv_purchase_time1) = xco_cp=>sy->time( )->as( xco_cp_time=>format->abap )->value.
+
+    out->write( |asignada por inline: { mv_purchase_date1 } | ).
+    out->write( |asignada por inline: { mv_purchase_time1 } | ).
 
     "2. Tipo de datos complejos
 
@@ -47,9 +53,6 @@ CLASS zcl_lab_01_var_jcprabap IMPLEMENTATION.
     DATA les_customer TYPE mty_customer.
 
     les_customer = VALUE #( id = 1 customer = 'Luis Marcel' age = 65 ).
-
-*    out->write( les_customer  ).
-*    out->write( |id={ les_customer-id } cliente={ les_customer-customer } Edad={ les_customer-age }| ).
 
     "3. Tipo de datos de referencia
 
