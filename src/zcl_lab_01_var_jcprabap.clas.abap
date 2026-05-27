@@ -68,6 +68,8 @@ CLASS zcl_lab_01_var_jcprabap IMPLEMENTATION.
     CREATE DATA mv_employees TYPE /dmo/employee_hr.
     ASSIGN mv_employees->* TO <fs_linea>.
 
+
+
     <fs_linea>-client = 111.
     <fs_linea>-employee = 1.
     <fs_linea>-first_name = 'Marcelo'.
@@ -84,8 +86,8 @@ CLASS zcl_lab_01_var_jcprabap IMPLEMENTATION.
     DATA: mv_product  TYPE string  VALUE 'Laptop',
           mv_bar_code TYPE xstring VALUE '1212121211'.
 
-     out->write( '----------------------------------------------' ).
-     out->write( |mv_product: { mv_product } mv_bar_code: { mv_bar_code } | ).
+    out->write( '----------------------------------------------' ).
+    out->write( |mv_product: { mv_product } mv_bar_code: { mv_bar_code } | ).
 
     "5. Constantes
     CONSTANTS: mc_date      TYPE d VALUE '20260524',
