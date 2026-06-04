@@ -70,7 +70,7 @@ CLASS zcl_lab_02_arithmetic_jcpr IMPLEMENTATION.
           lv_result             TYPE p LENGTH 4 DECIMALS 2.
 
     lv_result = lv_total_cost DIV lv_discount_threshold.
-    out->write( 'División sin resto DIV' ).
+    out->write( 'División sin resto DIV'(005) ).
     out->write( lv_result ).
     out->write( '------------------------' ).
 
@@ -80,7 +80,7 @@ CLASS zcl_lab_02_arithmetic_jcpr IMPLEMENTATION.
           lv_remainder           TYPE p LENGTH 4 DECIMALS 2.
 
     lv_remainder = lv_total_cost2 MOD lv_discount_threshold2.
-    out->write( 'Resto MOD' ).
+    out->write( text-004 ).
     out->write( lv_remainder ).
     out->write( '------------------------' ).
 
