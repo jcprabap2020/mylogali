@@ -24,9 +24,19 @@ CLASS zcl_varios_jcpr IMPLEMENTATION.
 *        catch cx_sy_conversion_error into data(lx_error).
 *            out->write( data = lx_error->get_longtext(  ) name = 'Error' ).
 *        endtry.
+        data: lv_int type i VALUE 100,
+              lv_ref type REF to i.
 
+        FIELD-SYMBOLS <fs_mio> type any.
 
+        lv_ref = ref #( lv_int ).
 
+        out->write( lv_ref->* ).
+        assign lv_ref->* to <fs_mio>.
+
+        <fs_mio> = 999.
+
+        out->write( lv_int ).
 
     endmethod.
 
