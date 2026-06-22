@@ -94,7 +94,10 @@ CLASS zcl_lab_04_message_jcpr IMPLEMENTATION.
             out->write( 'NO es un telefono' ).
         endif.
 
+
 *       5. Funciones con expresiones regulares
+        out->write( '-----------------------------------------------' ).
+        out->write( 'Funciones con expresiones regulares' ).
         out->write( '---------reconoce email------------------------' ).
         DATA: lv_email  type string VALUE 'jcpinarivara@gmail.co',
               lv_patter type string VALUE '\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'.
@@ -104,6 +107,7 @@ CLASS zcl_lab_04_message_jcpr IMPLEMENTATION.
         else.
             out->write( 'NO es un correo' ).
         endif.
+
 
    endmethod.
 ENDCLASS.
