@@ -122,6 +122,10 @@ CLASS zcl_tablas1_jcp IMPLEMENTATION.
         order by  carrier_id
         into table @DATA(lti_flight2).
 
-     out->write( data = lti_flight2 ).
+     LOOP AT lti_flight2 into data(les_2).
+       out->write( data = les_2 ).
+     endloop.
+
+*     out->write( data = lti_flight2 ).
    endmethod.
 ENDCLASS.

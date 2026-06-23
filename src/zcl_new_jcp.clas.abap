@@ -31,5 +31,9 @@ CLASS zcl_new_jcp IMPLEMENTATION.
         data(lo_test) = new zcl_new_jcp( iv_nombre = 'juan' iv_codigo = '12345' ).
         out->write( | Nombre = { lo_test->lv_nombre } Código = { lo_test->lv_code } | ).
 
+        data(lr_oo) = ref #( lo_test ).
+
+        out->write( lr_oo->* ).
+
     endmethod.
 ENDCLASS.
