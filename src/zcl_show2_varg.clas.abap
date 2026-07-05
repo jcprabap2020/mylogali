@@ -18,7 +18,7 @@ CLASS zcl_show2_varg IMPLEMENTATION.
         types: lty_cod type RANGE OF string.
 
         data(ir_cod) = value lty_cod( ( option = 'CP' sign = 'I' low = 'JL' )
-                                      ( option = 'EQ' sign = 'I' low = 'SQ' )
+                                      ( option = 'EQ' sign = 'I' low = '' )
                                     ).
 
         data(lo_show) = new zcl_show_varg( ir_cod ).
