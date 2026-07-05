@@ -64,7 +64,7 @@ CLASS ZCL_LLENARTAB_JCPR IMPLEMENTATION.
 *append
 *        les_reg-cod = '999'.
 *        les_reg-nombre = 'Maria Contreras'.
-*        append les_reg to lti_employ.
+*           append les_reg to lti_employ.
 **        append initial LINE TO lti_employ.
 *        les_reg-cod = '111'.
 *        les_reg-nombre = 'julia contreras'.
@@ -127,13 +127,28 @@ CLASS ZCL_LLENARTAB_JCPR IMPLEMENTATION.
 **            out->write( lt_nueva ).
 *              out->write( gs_key ).
 *          endloop.
-      types: lty_carr type STANDARD TABLE OF /dmo/flight-carrier_id WITH EMPTY KEY.
+*      types: lty_carr type STANDARD TABLE OF /dmo/flight-carrier_id WITH EMPTY KEY.
+*
+*      data(lti_carriers) = value lty_carr( for GROUPS lv_grupo of ls_grupos in lti_flight
+*                                                  GROUP by ls_grupos-carrier_id
+*                                                  ASCENDING
+*                                                  WITHOUT MEMBERS ( lv_grupo  ) ).
+*                out->write( data = lti_carriers name = 'lti_carriers' ).
 
-      data(lti_carriers) = value lty_carr( for GROUPS lv_grupo of ls_grupos in lti_flight
-                                                  GROUP by ls_grupos-carrier_id
-                                                  ASCENDING
-                                                  WITHOUT MEMBERS ( lv_grupo  ) ).
-                out->write( data = lti_carriers name = 'lti_carriers' ).
+
+         DATA lti_x type SORTED TABLE OF /dmo/flight WITH NON-UNIQUE KEY carrier_id FLIGHT_DATE.
+*
+         select from /dmo/flight
+         fields *
+         into table @lti_x.
+
+*         out->write( data = lti_x name = 'lti_filter' ).
+
+         data(lti_filter) = FILTER #( lti_x where carrier_id = 'LH ' and
+                                                  FLIGHT_DATE < conv d( '20260419' ) ).
+out->write( data = lti_filter name = 'lti_filter' ).
+
+
     endmethod.
 
 ENDCLASS.
