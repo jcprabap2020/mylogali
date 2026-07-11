@@ -24,10 +24,10 @@ CLASS zcl_tablas1_jcp IMPLEMENTATION.
           lti_ind   TYPE SORTED TABLE OF /dmo/flight WITH NON-UNIQUE KEY flight_date,
           lti_ind2  LIKE lti_ind.
 
-*    SELECT *
-*    FROM /dmo/flight
-*    WHERE carrier_id = 'SQ'
-*    INTO TABLE @lti_index.
+    SELECT *
+    FROM /dmo/flight
+    WHERE carrier_id = 'SQ'
+    INTO TABLE @lti_index.
 
 *    "lti_ind[] = lti_index[].
 **    MOVE-CORRESPONDING lti_index to lti_ind.
@@ -109,7 +109,7 @@ CLASS zcl_tablas1_jcp IMPLEMENTATION.
      types: lty_ran type range of /dmo/flight-carrier_id.
 
 *     LOOP at lti_tipos into data(les_dat) from 2 to 5.
-         data(lti_range) = value lty_ran(  for les_dat in lti_tipos
+         data(lti_range) = value lty_ran(  for les_dat in lti_tipos where (  TABLE_LINE = 'UA' )
                                             (   sign = 'I'
                                               option = 'EQ'
                                               low = les_dat )
@@ -122,10 +122,10 @@ CLASS zcl_tablas1_jcp IMPLEMENTATION.
         order by  carrier_id
         into table @DATA(lti_flight2).
 
-     LOOP AT lti_flight2 into data(les_2).
-       out->write( data = les_2 ).
-     endloop.
+*     LOOP AT lti_flight2 into data(les_2).
+*       out->write( data = les_2 ).
+*     endloop.
 
-*     out->write( data = lti_flight2 ).
+     out->write( data = lti_flight2 ).
    endmethod.
 ENDCLASS.
