@@ -116,16 +116,54 @@ CLASS zcl_tablas1_jcp IMPLEMENTATION.
                                          ).
 *     endloop.
 
+DATA: lr_tabla type REF to data.
+
+*    select from /dmo/flight
+*        fields *
+*        where carrier_id in @lti_range
+*        order by  carrier_id
+*        into table @DATA(lti_flight2).
+*
+*     out->write( data = lti_flight2 ).
+
     select from /dmo/flight
         fields *
         where carrier_id in @lti_range
         order by  carrier_id
-        into table @DATA(lti_flight2).
+        into table new @lr_tabla.
 
-*     LOOP AT lti_flight2 into data(les_2).
-*       out->write( data = les_2 ).
-*     endloop.
+    ASSIGN lr_tabla->* to FIELD-SYMBOL(<fs_tabla>).
+    out->write( data = <fs_tabla> ).
 
-     out->write( data = lti_flight2 ).
+*    ASSIGN COMPONENT 4 OF STRUCTURE <fs_tabla> TO FIELD-SYMBOL(<fs_algo>).
+*         out->write( data = <fs_algo> ).
+
+     types: BEGIN of lty_reg,
+               field1 type string,
+               field2 TYPE string,
+               field3 type string,
+            END OF LTY_reg,
+            lty_tab type STANDARD TABLE OF lty_reg WITH EMPTY KEY.
+     FIELD-SYMBOLS <fs_linea> type any.
+
+     data(ls_linea) = value lty_reg(  ).
+     data(lti_reg) = value lty_tab(  ( field1 = 'hola' field2 = 'Juan' field3 = 'Carlos' ) ).
+     DATA ii type i VALUE 1.
+     data(ls_var) = ``.
+     ii = 1.
+     ls_linea = lti_reg[ 1 ].
+     while ii <= 3.
+         ls_var = 'field' && ii.
+         ASSIGN ls_linea-(ls_var)  to <fs_linea>.
+         out->write( data = <fs_linea> ).
+         ii = ii + 1.
+     endwhile.
+
+     out->write( data = lti_reg[ 1 ] ).
+     data(lr_linea) = new LTY_reg(  ).
+     lr_linea->* = lti_reg[ 1 ].
+     ASSIGN lr_linea->* to <fs_linea>.
+     out->write( data = lr_linea->field2 name = 'por refere' ).
+
    endmethod.
 ENDCLASS.
